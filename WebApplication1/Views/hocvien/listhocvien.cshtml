@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ClassLibrary1.hocvienModel>
+
+@{
+    ViewBag.Title = "listhocvien";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DANH SÁCH HỌC VIÊN</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("STT")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id_hocvien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngaysinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sdt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.diachi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngaythamgia)
+        </th>
+    </tr>
+    @if (Model != null)
+    {
+        var dem = 0;
+        foreach (var item in Model)
+        {
+            dem++;
+            <tr>
+                <td>
+                    @Html.Raw(dem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_hocvien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ngaysinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sdt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.diachi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ngaythamgia)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "edithocvien", new { id = item.id_hocvien }, new { title = "Sửa thông tin học viên" }) |
+                    @Html.ActionLink("Xóa", "deletehocvien", new { id = item.id_hocvien }, new { title = "Xóa thông tin học viên" })
+                </td>
+            </tr>
+        }
+    }
+</table>

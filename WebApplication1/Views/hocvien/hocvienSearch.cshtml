@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ClassLibrary1.hocvienModel>
+
+@{
+    ViewBag.Title = "hocvienSearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>TÌM KIẾM</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        @using (Html.BeginForm("hocvienSearch", "Hocvien", FormMethod.Get, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-horizontal">
+                @Html.ValidationSummary()
+                <div class="form-group">
+                    @Html.Label("ID học viên", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBox("id_hocvien", null, new { style = "width: 200px;", @class = "form-control", @placeholder = "Nhập ID", @data_val = "true", @data_val_required = "Vui lòng nhập mã" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Tìm kiếm" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+            <i>@ViewBag.Infor</i>
+        }
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.Label("STT")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.id_hocvien)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ten)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ngaysinh)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sdt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.diachi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ngaythamgia)
+                </th>
+                <th></th>
+            </tr>
+            @if (Model != null)
+            {
+                var dem = 0;
+                foreach (var item in Model)
+                {
+                    dem++;
+                    <tr>
+                        <td>
+                            @Html.Raw(dem)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.id_hocvien)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ten)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ngaysinh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sdt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.diachi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ngaythamgia)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Sửa", "hocvienEdit", new { id = item.id_hocvien }, new { title = "Sửa thông tin học viên" }) |
+                            @Html.ActionLink("Xóa", "hocvienDelete", new { id = item.id_hocvien }, new { title = "Xóa thông tin học viên" })
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
